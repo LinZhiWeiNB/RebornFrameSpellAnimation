@@ -1,0 +1,11 @@
+{
+  "name": "com.reborn.spell.animation",
+  "displayName": "技能 Animation 轨道",
+  "version": "1.0.0",
+  "unity": "6000.0",
+  "description": "用 Unity Animator 播放技能表现轨道。",
+  "dependencies": {
+    "com.reborn.spell": "1.2.0",
+    "com.reborn.protobuf": "1.0.0"
+  }
+}

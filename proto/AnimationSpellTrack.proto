@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option csharp_namespace = "RebornFrame.Spell.Animation";
+
+// 一条 Unity Animator 轨道。clip_key 可选，用来提前载入 AnimationClip。stop_state 为空时停止不做切换。
+message AnimationSpellTrackConfig {
+  string state_name = 1;
+  int32 layer = 2;
+  string clip_key = 3;
+  string stop_state = 4;
+}
