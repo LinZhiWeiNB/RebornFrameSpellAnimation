@@ -11,6 +11,7 @@ namespace RebornFrame.Spell.Animation
         public static readonly SpellPresentationTrackId TypeId = SpellPresentationTrackId.Combine(0, 5);
 
         private static readonly Dictionary<string, AnimationClip> Clips = new();
+        private static readonly Dictionary<string, GameObject> Prefabs = new();
         private static readonly Dictionary<ulong, Animator> Animators = new();
 
         /// <summary>把单位绑定到 Animator。</summary>
@@ -36,6 +37,31 @@ namespace RebornFrame.Spell.Animation
             if (clip == null) throw new ArgumentNullException(nameof(clip));
 
             Clips[key] = clip;
+        }
+
+        /// <summary>
+        ///     收下数据包解开后的预制体。
+        ///     数据包不会把 AssetBundle 的字节交到这里。
+        /// </summary>
+        /// <param name="key">预制体键。</param>
+        /// <param name="prefab">预制体。</param>
+        public static void AcceptPrefab(string key, GameObject prefab)
+        {
+            if (string.IsNullOrEmpty(key) || prefab == null) return;
+
+            Prefabs[key] = prefab;
+        }
+
+        /// <summary>取出已经收下的动画预制体。</summary>
+        public static bool TryGetPrefab(string key, out GameObject prefab)
+        {
+            if (string.IsNullOrEmpty(key))
+            {
+                prefab = null;
+                return false;
+            }
+
+            return Prefabs.TryGetValue(key, out prefab);
         }
 
         /// <summary>向技能包注册 Animation 轨道。重复调用没有效果。</summary>
