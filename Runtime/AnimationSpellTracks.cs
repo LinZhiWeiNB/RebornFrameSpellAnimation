@@ -132,6 +132,17 @@ namespace RebornFrame.Spell.Animation
 
                 _animator.Play(_stopState, _layer, 0f);
             }
+
+            public void Show(int frame, bool play)
+            {
+                if (_animator == null) return;
+
+                var seconds = Math.Max(0, frame) * SpellPresentation.FrameDuration;
+                _animator.speed = 1f;
+                _animator.Play(_stateName, _layer, 0f);
+                if (seconds > 0f) _animator.Update(seconds);
+                _animator.speed = play ? 1f : 0f;
+            }
         }
     }
 }
